@@ -41,7 +41,6 @@ class PrimaryErrorWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.all(40.0),
-      color: Colors.white,
       child: Center(
         child: Column(
           mainAxisSize: MainAxisSize.min,
