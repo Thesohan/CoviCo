@@ -101,12 +101,13 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       failureBuilder:
           (BuildContext context, StateModel data, Resource resource) {
-        return PrimaryErrorWidget(
+        return PrimaryErrorWidget.networkErrorOrNot(
+          context: context,
+          isNetworkError: resource.isNetworkError,
           message: 'Something went wrong.',
           onRetry: () {
             stateDataBloc.dispatch(StateDataEvent());
           },
-          icon: Icon(Icons.warning),
         );
       },
     );

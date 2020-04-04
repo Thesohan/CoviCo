@@ -37,23 +37,27 @@ class StateDataBloc extends BaseBloc<BaseEvent> {
   }
 
   void _fetchStateData() async {
-    Resource<StateModel> res = await _stateDataRepository.fetchStateData().last;
-    if (res != null && res.data != null) {
-      List<CasesTimeSeries> cases =
-          res?.data?.casesTimeSeries?.reversed?.toList();
-      List<Statewise> states = res.data.statewise;
-      Statewise temp = states[0];
-      states.removeAt(0);
-      states.add(temp);
-      res = res.copyWithNewData(
-          data: StateModel(
-              casesTimeSeries: cases,
-              statewise: states,
-              keyValues: res.data.keyValues,
-              tested: res.data.tested));
+    /// Always listen to the stream. Using stream.first || stream.last will give you only single result.
+    _stateDataRepository.fetchStateData().listen((Resource<StateModel> res) {
+      if (res.data != null) {
+        List<CasesTimeSeries> cases =
+            res?.data?.casesTimeSeries?.reversed?.toList();
+        List<Statewise> states = res.data.statewise;
+        Statewise temp = states[0];
+        states.removeAt(0);
+        states.add(temp);
+        res = res.copyWithNewData(
+            data: StateModel(
+                casesTimeSeries: cases,
+                statewise: states,
+                keyValues: res.data.keyValues,
+                tested: res.data.tested));
+        dispatch(
+          GetSeriesDataEvent(casesTimeSeries: cases),
+        );
+      }
       _stateModelBehaviorSubject.add(res);
-  dispatch(GetSeriesDataEvent(casesTimeSeries: cases));
-    }
+    });
   }
 
   @override

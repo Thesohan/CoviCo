@@ -24,14 +24,14 @@ class PrimaryErrorWidget extends StatelessWidget {
   factory PrimaryErrorWidget.networkErrorOrNot({
     @required BuildContext context,
     @required String message,
-    bool isNetworkError,
+   @required bool isNetworkError,
     OnRetry onRetry,
   }) {
     ArgumentError.checkNotNull(context, "context");
     ArgumentError.checkNotNull(message, "message");
 
     return PrimaryErrorWidget(
-      message: isNetworkError ? 'no_internet_connection' : message,
+      message: isNetworkError ? 'No internet connection' : message,
       onRetry: onRetry,
       icon: isNetworkError ? Icon(Icons.network_check) : Icon(Icons.warning),
     );

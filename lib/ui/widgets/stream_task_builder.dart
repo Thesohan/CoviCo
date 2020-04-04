@@ -47,13 +47,14 @@ class StreamTaskBuilder<T> extends StatelessWidget {
         if (snapshot.hasData && snapshot.data.isSuccess) {
           return this
               .successBuilder(context, snapshot?.data?.data, snapshot.data);
-        }
-       else if (snapshot.hasData && snapshot.data.isLoading) {
-          return this
-              .loadingBuilder(context, snapshot?.data?.data, snapshot.data);
-        } else {
+        } else if (snapshot.hasError ||
+            (snapshot.hasData &&
+                (snapshot.data.isFailure || snapshot.data.isNetworkError))) {
           return this
               .failureBuilder(context, snapshot?.data?.data, snapshot.data);
+        } else {
+          return this
+              .loadingBuilder(context, snapshot?.data?.data, snapshot.data);
         }
       },
     );
