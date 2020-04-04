@@ -86,13 +86,13 @@ class _buildCasesTimeSeriesItem extends StatelessWidget {
           children: [
             TableRow(
               children: <Widget>[
-                Text('${casesTimeSeries.dailyconfirmed}'),
+                Text('+${casesTimeSeries.dailyconfirmed}'),
                 Text(
-                  '${casesTimeSeries.dailydeceased}',
+                  '+${casesTimeSeries.dailydeceased}',
                   style: TextStyle(
                       color: AppColors.red, fontWeight: FontWeight.bold),
                 ),
-                Text('${casesTimeSeries.dailyrecovered}',),
+                Text('+${casesTimeSeries.dailyrecovered}',),
                 Text('${casesTimeSeries.totalconfirmed}'),
                 Text(
                   '${casesTimeSeries.totalrecovered}',
