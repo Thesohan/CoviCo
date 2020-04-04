@@ -1,16 +1,21 @@
 # covico
+CoviCo keeps the track of number of affected people in India due to Corona virus.
 
-A new Flutter project.
+Concepts/Tools Used:
+1- Bloc architecture
+2- Dependency Injection
+3- RxDart
+4- Charts
+5- Provider
+6- Dio
 
-## Getting Started
+https://api.covid19india.org/data.json
+Above api is used to get the latest data.
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
+Download the apk using below link:-
+https://drive.google.com/open?id=1KgP3Rp9OHfoHgv6_UiowqyPkr1kHCerA
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+
+
