@@ -5,7 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-class CasesTimeSeriesWidget extends StatefulWidget{
+class CasesTimeSeriesWidget extends StatefulWidget {
   final List<CasesTimeSeries> casesTimeSeries;
   const CasesTimeSeriesWidget({Key key, this.casesTimeSeries})
       : assert(casesTimeSeries != null),
@@ -32,6 +32,10 @@ class _CasesTimeSeriesWidgetState extends State<CasesTimeSeriesWidget> {
               ),
               Text(
                 'Daily Deceased',
+                style: Theme.of(context).textTheme.caption,
+              ),
+              Text(
+                'Daily Recovered',
                 style: Theme.of(context).textTheme.caption,
               ),
               Text(
@@ -88,6 +92,7 @@ class _buildCasesTimeSeriesItem extends StatelessWidget {
                   style: TextStyle(
                       color: AppColors.red, fontWeight: FontWeight.bold),
                 ),
+                Text('${casesTimeSeries.dailyrecovered}',),
                 Text('${casesTimeSeries.totalconfirmed}'),
                 Text(
                   '${casesTimeSeries.totalrecovered}',
@@ -95,7 +100,11 @@ class _buildCasesTimeSeriesItem extends StatelessWidget {
                     color: Colors.green,
                   ),
                 ),
-                Text('${casesTimeSeries.date}',style: Theme.of(context).textTheme.caption,),
+
+                Text(
+                  '${casesTimeSeries.date}',
+                  style: Theme.of(context).textTheme.caption,
+                ),
               ],
             ),
           ],

@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:io';
+import 'package:covico/data/network/error_handler.dart';
 import 'package:covico/data/resource.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/widgets.dart';
@@ -7,6 +8,7 @@ import 'package:logging/logging.dart';
 import 'package:meta/meta.dart';
 
 enum Method { get, post, delete, put }
+
 /// Singleton class
 class RequestHandler {
   static RequestHandler _instance;
@@ -62,40 +64,6 @@ class RequestHandler {
         return handleDioError(error);
       }
       return Resource.failure(message: error.toString());
-    }
-  }
-
-  /// Handle all cases of [DioError].
-  Resource<T> handleDioError<T>(DioError error) {
-    // TODO(leen-nobbas): Wrap this in a try catch
-    switch (error.type) {
-      case DioErrorType.CONNECT_TIMEOUT:
-        {
-          return Resource.failure(
-            message: "Network problem. Something went wrong.",
-//            statusCode: error.response.statusCode,
-          );
-        }
-      case DioErrorType.DEFAULT:
-        {
-          return Resource.failure(
-            message:
-                "No internet connection. Make sure wi-fi or cellular data is turned on then try again",
-            isNetworkError: true,
-            statusCode: -1,
-          );
-        }
-      case DioErrorType.RESPONSE:
-        {
-          return Resource.failure(
-            message: "Something Went Wrong",
-//            statusCode: error.response.statusCode,
-          );
-        }
-      default:
-        {
-          return Resource.failure(message: error.toString());
-        }
     }
   }
 //

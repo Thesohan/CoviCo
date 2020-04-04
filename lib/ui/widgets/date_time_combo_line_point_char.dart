@@ -16,7 +16,7 @@ class DateTimeComboLinePointChart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return new charts.TimeSeriesChart(
+    return charts.TimeSeriesChart(
       seriesList,
       animate: animate,
       // Configure the default renderer as a line renderer. This will be used

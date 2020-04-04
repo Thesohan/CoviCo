@@ -64,12 +64,12 @@ class CasesTimeSeries {
 
   CasesTimeSeries(
       {this.dailyconfirmed,
-        this.dailydeceased,
-        this.dailyrecovered,
-        this.date,
-        this.totalconfirmed,
-        this.totaldeceased,
-        this.totalrecovered});
+      this.dailydeceased,
+      this.dailyrecovered,
+      this.date,
+      this.totalconfirmed,
+      this.totaldeceased,
+      this.totalrecovered});
 
   CasesTimeSeries.fromJson(Map<String, dynamic> json) {
     dailyconfirmed = json['dailyconfirmed'];
@@ -104,11 +104,11 @@ class KeyValues {
 
   KeyValues(
       {this.confirmeddelta,
-        this.counterforautotimeupdate,
-        this.deceaseddelta,
-        this.lastupdatedtime,
-        this.recovereddelta,
-        this.statesdelta});
+      this.counterforautotimeupdate,
+      this.deceaseddelta,
+      this.lastupdatedtime,
+      this.recovereddelta,
+      this.statesdelta});
 
   KeyValues.fromJson(Map<String, dynamic> json) {
     confirmeddelta = json['confirmeddelta'];
@@ -146,16 +146,16 @@ class Statewise {
 
   Statewise(
       {this.active,
-        this.confirmed,
-        this.deaths,
-        this.delta,
-        this.deltaconfirmed,
-        this.deltadeaths,
-        this.deltarecovered,
-        this.lastupdatedtime,
-        this.recovered,
-        this.state,
-        this.statecode});
+      this.confirmed,
+      this.deaths,
+      this.delta,
+      this.deltaconfirmed,
+      this.deltadeaths,
+      this.deltarecovered,
+      this.lastupdatedtime,
+      this.recovered,
+      this.state,
+      this.statecode});
 
   Statewise.fromJson(Map<String, dynamic> json) {
     active = json['active'];
@@ -225,11 +225,11 @@ class Tested {
 
   Tested(
       {this.source,
-        this.testsconductedbyprivatelabs,
-        this.totalindividualstested,
-        this.totalpositivecases,
-        this.totalsamplestested,
-        this.updatetimestamp});
+      this.testsconductedbyprivatelabs,
+      this.totalindividualstested,
+      this.totalpositivecases,
+      this.totalsamplestested,
+      this.updatetimestamp});
 
   Tested.fromJson(Map<String, dynamic> json) {
     source = json['source'];

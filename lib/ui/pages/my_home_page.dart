@@ -1,12 +1,10 @@
 import 'package:covico/blocs/state_data_bloc/state_data_bloc.dart';
 import 'package:covico/blocs/state_data_bloc/state_data_event.dart';
-import 'package:covico/constants/appColors.dart';
 import 'package:covico/data/models/state_model.dart';
 import 'package:covico/data/models/time_count_model.dart';
 import 'package:covico/data/resource.dart';
 import 'package:covico/ui/widgets/cases_time_series.dart';
 import 'package:covico/ui/widgets/chart_widget.dart';
-import 'package:covico/ui/widgets/date_time_combo_line_point_char.dart';
 import 'package:covico/ui/widgets/primary_error_widget.dart';
 import 'package:covico/ui/widgets/statewise_widget.dart';
 import 'package:covico/ui/widgets/stream_task_builder.dart';
@@ -52,7 +50,10 @@ class _MyHomePageState extends State<MyHomePage> {
                     Icons.brightness_3,
                     color: Colors.grey,
                   ),
-            onPressed: () => ThemeSwitcher.of(context).switchDarkMode(),
+            onPressed: (){
+              _selectedIndex=0;
+              ThemeSwitcher.of(context).switchDarkMode();
+            }
           ),
         ],
       ),
@@ -68,7 +69,6 @@ class _MyHomePageState extends State<MyHomePage> {
           Resource<StateModel> resource) {
         List<CasesTimeSeries> cases = data.casesTimeSeries;
         List<Statewise> statewise = data.statewise;
-
         if (_selectedIndex == 0) {
           return CasesTimeSeriesWidget(
             casesTimeSeries: cases,
@@ -80,8 +80,17 @@ class _MyHomePageState extends State<MyHomePage> {
           );
         }
         if (_selectedIndex == 2) {
-          return ChartWidget(series: createSampleData(cases),);
-
+          return StreamBuilder<List<charts.Series<TimeCountModel, DateTime>>>(
+              stream: stateDataBloc.chartSeriesDataObservable,
+              builder: (context, snapshot) {
+                if (snapshot.hasData && snapshot.data!=null) {
+                  return ChartWidget(series: snapshot.data);
+                } else {
+                  return SpinKitChasingDots(
+                    color: Theme.of(context).accentColor,
+                  );
+                }
+              });
         }
         return Container();
       },
@@ -101,84 +110,6 @@ class _MyHomePageState extends State<MyHomePage> {
         );
       },
     );
-  }
-
-  static List<charts.Series<TimeCountModel, DateTime>> createSampleData(
-      List<CasesTimeSeries> cases) {
-    final List<TimeCountModel> dailyConfirmedCases = [];
-    final List<TimeCountModel> dailyDeceasedCases = [];
-    final List<TimeCountModel> dailyRecovered = [];
-    Map<String, String> monthMap = {
-      'January': '1',
-      'February': '2',
-      'March': '3',
-      'April': '4',
-      'May': '5',
-      'June': '6',
-      'July': '7',
-      'August': '8',
-      'September': '9',
-      'October': '10',
-      'November': '11',
-      'December': '12',
-    };
-    cases?.forEach((CasesTimeSeries element) {
-      List<String> date = element.date.split(' ');
-      if (date.length > 1) {
-        String month = monthMap['${date[1]}'];
-        String day = date[0];
-        dailyConfirmedCases.add(
-          TimeCountModel(
-            DateTime(2020, int.parse(month), int.parse(day)),
-            int.parse(
-              element.dailyconfirmed,
-            ),
-          ),
-        );
-        dailyDeceasedCases.add(
-          TimeCountModel(
-            DateTime(2020, int.parse(month), int.parse(day)),
-            int.parse(
-              element.dailydeceased,
-            ),
-          ),
-        );
-        dailyRecovered.add(
-          TimeCountModel(
-            DateTime(2020, int.parse(month), int.parse(day)),
-            int.parse(
-              element.dailyrecovered,
-            ),
-          ),
-        );
-      }
-    });
-    return [
-      new charts.Series<TimeCountModel, DateTime>(
-        id: 'Daily Confirmed',
-        displayName: 'Daily Confirmed',
-        colorFn: (_, __) => charts.MaterialPalette.blue.shadeDefault,
-        domainFn: (TimeCountModel sales, _) => sales.time,
-        measureFn: (TimeCountModel sales, _) => sales.count,
-        data: dailyConfirmedCases,
-      ),
-      new charts.Series<TimeCountModel, DateTime>(
-        id: 'Daily Deceased',
-        displayName: 'Daily Deceased',
-        colorFn: (_, __) => charts.MaterialPalette.red.shadeDefault,
-        domainFn: (TimeCountModel sales, _) => sales.time,
-        measureFn: (TimeCountModel sales, _) => sales.count,
-        data: dailyDeceasedCases,
-      ),
-      new charts.Series<TimeCountModel, DateTime>(
-        id: 'Daily Recovered',
-        displayName: 'Daily Recovered',
-        colorFn: (_, __) => charts.MaterialPalette.green.shadeDefault,
-        domainFn: (TimeCountModel sales, _) => sales.time,
-        measureFn: (TimeCountModel sales, _) => sales.count,
-        data: dailyRecovered,
-      ),
-    ];
   }
 
   Widget _buildBottomNavigationBar() {

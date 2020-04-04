@@ -15,7 +15,7 @@ class PrimaryErrorWidget extends StatelessWidget {
     @required this.message,
     this.title = "Oops!!!",
     this.onRetry,
-   @required this.icon,
+    @required this.icon,
   })  : assert(title != null && message != null && icon != null),
         super(key: key);
 
@@ -31,12 +31,9 @@ class PrimaryErrorWidget extends StatelessWidget {
     ArgumentError.checkNotNull(message, "message");
 
     return PrimaryErrorWidget(
-      message: isNetworkError
-          ?'no_internet_connection'
-          : message,
+      message: isNetworkError ? 'no_internet_connection' : message,
       onRetry: onRetry,
-      icon:
-          isNetworkError ? Icon(Icons.network_check):Icon(Icons.warning),
+      icon: isNetworkError ? Icon(Icons.network_check) : Icon(Icons.warning),
     );
   }
 
@@ -96,8 +93,7 @@ class PrimaryErrorWidget extends StatelessWidget {
       fillColor: Colors.blueAccent,
       materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
       shape: RoundedRectangleBorder(
-        borderRadius:
-            BorderRadius.circular(4.0),
+        borderRadius: BorderRadius.circular(4.0),
       ),
       elevation: 0.0,
       highlightElevation: 0.0,

@@ -5,10 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:logging/logging.dart';
 
 void main() {
-  AppConfig.init(AppFlavor.production);
-  AppLogger.initLogger(false);
+  AppConfig.init(AppFlavor.development);
+  AppLogger.initLogger(true);
 
-  FlutterError.onError=(error){
+  FlutterError.onError = (error) {
     FlutterError.dumpErrorToConsole(error);
     Logger logger = Logger('mail');
     logger.warning('###Error####');

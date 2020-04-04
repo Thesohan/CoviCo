@@ -1,9 +1,7 @@
-
 import 'package:covico/util/app_keys.dart';
 
 /// Add new app Flavor here
-enum AppFlavor {development,production}
-
+enum AppFlavor { development, production }
 
 /// Provides configuration depending on the flavor of build.
 /// Any property app configuration that differs in prod and dev should be
@@ -21,7 +19,6 @@ class AppConfig {
     }
     _appFlavor = flavor;
   }
-
 
   static AppFlavor get appFlavor => _appFlavor;
 

@@ -22,12 +22,13 @@ class NetworkService {
   final Dio _dio;
 
   StateDataApi _stateDataApi;
+
   /// Only get is allowed to prevent any change from outside [NetworkService],
   /// and allow just read access to the variable.
 
   StateDataApi get stateDataApi => _stateDataApi;
 
-  Map<String,String>cookies = {};
+  Map<String, String> cookies = {};
   NetworkService._({
     this.shouldLog = false,
   }) : _dio = Dio(
@@ -55,16 +56,16 @@ class NetworkService {
     RequestHandler.init(_dio);
     final RequestHandler requestHandler = RequestHandler.instance;
 
-
     // Set up all the API's
     _stateDataApi = StateDataApi(requestHandler);
-   }
+  }
 
   /// Update the Token Interceptor with new token
   updateToken(String token) {
 //    _tokenInterceptor.updateToken(token);
   }
 }
+
 _parseAndDecode(String response) {
   return jsonDecode(response);
 }
