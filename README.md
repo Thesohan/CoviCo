@@ -14,7 +14,7 @@ Above api is used to get the latest data.
 
 
 Download the apk using below link:-
-https://drive.google.com/open?id=114YeHgdyMs2kV61JaRWxX81LxjLrKFIo
+https://drive.google.com/open?id=1uCbTyH0UxGwfE_taxvjl70QfYAnQ9wiv
 
 
 
