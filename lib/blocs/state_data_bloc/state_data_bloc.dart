@@ -1,6 +1,7 @@
 import 'package:covico/blocs/base/baseEvent.dart';
 import 'package:covico/blocs/base/base_bloc.dart';
 import 'package:covico/blocs/state_data_bloc/state_data_event.dart';
+import 'package:covico/data/models/district_wise_model.dart';
 import 'package:covico/data/models/state_model.dart';
 import 'package:covico/data/models/time_count_model.dart';
 import 'package:covico/data/repository/state_data_repository/state_data_repository.dart';
@@ -27,12 +28,30 @@ class StateDataBloc extends BaseBloc<BaseEvent> {
   Observable<Resource<StateModel>> get stateDataObservable =>
       _stateModelBehaviorSubject.stream;
 
+  BehaviorSubject<Resource<List<DistrictWiseModel>>>
+      _districtWiseBehaviorSubject =
+      BehaviorSubject<Resource<List<DistrictWiseModel>>>();
+  Observable<Resource<List<DistrictWiseModel>>> get districtWiseObservable =>
+      _districtWiseBehaviorSubject.stream;
+
+
+  BehaviorSubject<List<charts.Series<DistrictConfirmedModel, String>>>
+  _simpleChartSeriesBehaviorSubject =
+  BehaviorSubject<List<charts.Series<DistrictConfirmedModel, String>>>();
+  Observable<List<charts.Series<DistrictConfirmedModel,String>>>
+  get simpleChartSeriesDataObservable => _simpleChartSeriesBehaviorSubject.stream;
+
   @override
   void handleEvent(BaseEvent event) {
     if (event is StateDataEvent) {
       _fetchStateData();
     } else if (event is GetSeriesDataEvent) {
       _getChartSeries(event.casesTimeSeries);
+    } else if (event is GetDistrictDataEvent) {
+      _getDistrictData(event);
+    }
+    else if(event is GetDistrictSeriesEvent){
+      _getDistrictSeries(event);
     }
   }
 
@@ -64,6 +83,8 @@ class StateDataBloc extends BaseBloc<BaseEvent> {
   void dispose() {
     _stateModelBehaviorSubject.close();
     _chartSeriesBehaviorSubject.close();
+    _districtWiseBehaviorSubject.close();
+    _districtWiseBehaviorSubject.close();
     super.dispose();
   }
 
@@ -144,5 +165,37 @@ class StateDataBloc extends BaseBloc<BaseEvent> {
     ];
 
     _chartSeriesBehaviorSubject.add(charSeriesList);
+  }
+
+  void _getDistrictData(GetDistrictDataEvent event) {
+    _stateDataRepository
+        .fetchDistrictData()
+        .listen((Resource<List<DistrictWiseModel>> res) {
+      if (res.data != null) {
+      }
+      print(res);
+      _districtWiseBehaviorSubject.add(res);
+
+    });
+  }
+
+  void _getDistrictSeries(GetDistrictSeriesEvent event)async {
+    _simpleChartSeriesBehaviorSubject.add(null);
+    final List<DistrictConfirmedModel> data = [];
+    event.districtDataList.forEach((element) {
+      data.add(DistrictConfirmedModel(element.district,element.confirmed));
+    });
+
+    List<charts.Series<DistrictConfirmedModel,String>> series= [
+      charts.Series<DistrictConfirmedModel, String>(
+        id: 'District',
+        colorFn: (_, __) => charts.MaterialPalette.teal.shadeDefault,
+        domainFn: (DistrictConfirmedModel districtConfirmedModel, _) => districtConfirmedModel.district,
+        measureFn: (DistrictConfirmedModel districtConfirmedModel, _) => districtConfirmedModel.confirmed,
+        data: data,
+      )
+    ];
+    _simpleChartSeriesBehaviorSubject.add(series);
+
   }
 }

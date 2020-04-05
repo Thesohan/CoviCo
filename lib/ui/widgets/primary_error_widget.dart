@@ -1,4 +1,3 @@
-import 'package:covico/constants/appColors.dart';
 import 'package:covico/constants/spaces.dart';
 import 'package:flutter/material.dart';
 

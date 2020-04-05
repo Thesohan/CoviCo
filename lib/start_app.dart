@@ -15,7 +15,7 @@ void startApp() async {
   ]);
   runApp(
     ThemeSwitcherWidget(
-      initialDarkModeOn: false,
+      initialDarkModeOn: true,
       child: MyApp(),
     ),
   );

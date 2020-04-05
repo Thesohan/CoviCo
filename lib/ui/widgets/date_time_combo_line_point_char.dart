@@ -23,10 +23,11 @@ class DateTimeComboLinePointChart extends StatelessWidget {
       // for any series that does not define a rendererIdKey.
       //
       // This is the default configuration, but is shown here for  illustration.
-      defaultRenderer: new charts.LineRendererConfig(),
+      defaultRenderer: charts.LineRendererConfig(),
       // Custom renderer configuration for the point series.
       customSeriesRenderers: [
-        new charts.PointRendererConfig(
+        charts.PointRendererConfig(
+
             // ID used to link series to this renderer.
             customRendererId: 'customPoint')
       ],

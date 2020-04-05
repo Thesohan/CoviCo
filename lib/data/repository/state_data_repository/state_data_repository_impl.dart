@@ -1,3 +1,4 @@
+import 'package:covico/data/models/district_wise_model.dart';
 import 'package:covico/data/models/state_model.dart';
 import 'package:covico/data/network/network_service.dart';
 import 'package:covico/data/repository/state_data_repository/state_data_repository.dart';
@@ -13,16 +14,10 @@ class StateDataRepositoryImpl extends StateDataRepository {
     yield Resource.loading();
     yield await networkService.stateDataApi.fetchStateData();
   }
-//
-//  LoginRepositoryImpl({@required this.networkService})
-//      : assert(networkService != null);
-//
-//  @override
-//  Stream<Resource<AllArtistInfoResponse>> loginWithCredential(
-//      LoginModel credential) async* {
-//    assert(credential != null);
-//    yield Resource.loading();
-//    yield await networkService.loginApi.userLogin(credential: credential);
-//  }
 
+  @override
+  Stream<Resource<List<DistrictWiseModel>>> fetchDistrictData() async*{
+    yield Resource.loading();
+    yield await networkService.stateDataApi.fetchDistrictData();
+  }
 }
