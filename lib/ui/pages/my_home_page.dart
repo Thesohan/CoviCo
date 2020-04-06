@@ -1,13 +1,11 @@
 import 'package:covico/blocs/state_data_bloc/state_data_bloc.dart';
 import 'package:covico/blocs/state_data_bloc/state_data_event.dart';
 import 'package:covico/constants/spaces.dart';
-import 'package:covico/data/models/district_wise_model.dart';
 import 'package:covico/data/models/state_model.dart';
 import 'package:covico/data/models/time_count_model.dart';
 import 'package:covico/data/resource.dart';
 import 'package:covico/ui/widgets/cases_time_series.dart';
 import 'package:covico/ui/widgets/chart_widget.dart';
-import 'package:covico/ui/widgets/district_wise_widget.dart';
 import 'package:covico/ui/widgets/primary_error_widget.dart';
 import 'package:covico/ui/widgets/statewise_widget.dart';
 import 'package:covico/ui/widgets/stream_task_builder.dart';
@@ -82,20 +80,17 @@ class _MyHomePageState extends State<MyHomePage> {
         if (_selectedIndex == 0) {
           return _buildHome(statewise[statewise.length - 1]);
         }
-        if (_selectedIndex == 1) {
+        if (_selectedIndex == 2) {
           return CasesTimeSeriesWidget(
             casesTimeSeries: cases,
           );
         }
-        if (_selectedIndex == 2) {
+        if (_selectedIndex == 1) {
           return StateWiseWidget(
             statewise: statewise,
           );
         }
         if (_selectedIndex == 3) {
-          return _buildDistrictData();
-        }
-        if (_selectedIndex == 4) {
           return StreamBuilder<List<charts.Series<TimeCountModel, DateTime>>>(
               stream: stateDataBloc.chartSeriesDataObservable,
               builder: (context, snapshot) {
@@ -137,16 +132,12 @@ class _MyHomePageState extends State<MyHomePage> {
           title: Text('Home'),
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.dialpad),
-          title: Text("CasesTimeSeries"),
-        ),
-        BottomNavigationBarItem(
           icon: Icon(Icons.category),
           title: Text('State Data'),
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.gamepad),
-          title: Text('District Data'),
+          icon: Icon(Icons.open_in_browser),
+          title: Text("CasesTimeSeries"),
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.show_chart),
@@ -168,31 +159,31 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  Widget _buildDistrictData() {
-    return StreamTaskBuilder(
-        stream: stateDataBloc.districtWiseObservable,
-        successBuilder: (BuildContext context,
-            List<DistrictWiseModel> districtData,
-            Resource<List<DistrictWiseModel>> resource) {
-          return DistrictWiseWidget(districtWiseData: districtData);
-        },
-        loadingBuilder: (BuildContext context, List<DistrictWiseModel> data,
-                Resource resource) =>
-            SpinKitChasingDots(
-              color: Theme.of(context).accentColor,
-            ),
-        failureBuilder: (BuildContext context, List<DistrictWiseModel> data,
-            Resource<List<DistrictWiseModel>> resource) {
-          return PrimaryErrorWidget.networkErrorOrNot(
-            context: context,
-            isNetworkError: resource.isNetworkError,
-            message: 'Something went wrong.',
-            onRetry: () {
-              stateDataBloc.dispatch(GetDistrictDataEvent());
-            },
-          );
-        });
-  }
+//  Widget _buildDistrictData() {
+//    return StreamTaskBuilder(
+//        stream: stateDataBloc.districtWiseObservable,
+//        successBuilder: (BuildContext context,
+//            List<DistrictWiseModel> districtData,
+//            Resource<List<DistrictWiseModel>> resource) {
+//          return DistrictWiseWidget(districtWiseData: districtData);
+//        },
+//        loadingBuilder: (BuildContext context, List<DistrictWiseModel> data,
+//                Resource resource) =>
+//            SpinKitChasingDots(
+//              color: Theme.of(context).accentColor,
+//            ),
+//        failureBuilder: (BuildContext context, List<DistrictWiseModel> data,
+//            Resource<List<DistrictWiseModel>> resource) {
+//          return PrimaryErrorWidget.networkErrorOrNot(
+//            context: context,
+//            isNetworkError: resource.isNetworkError,
+//            message: 'Something went wrong.',
+//            onRetry: () {
+//              stateDataBloc.dispatch(GetDistrictDataEvent());
+//            },
+//          );
+//        });
+//  }
 
   Widget _buildHome(Statewise statewise) {
     return ListView(
@@ -342,7 +333,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: Text(
                   'Cover your nose and mouth with a disposable tissue or flexed elbow when you cough or sneeze Avoid close contact (1 meter or 3 feet) with people who are unwell.',
                   style: Theme.of(context).textTheme.subtitle1.copyWith(
-                        letterSpacing: 2.0,
+                        letterSpacing: 2.0,wordSpacing: 2.0
                       ),
                 ),
               ),

@@ -142,24 +142,25 @@ class StateDataBloc extends BaseBloc<BaseEvent> {
         id: 'Daily Confirmed',
         displayName: 'Daily Confirmed',
         colorFn: (_, __) => charts.MaterialPalette.blue.shadeDefault,
-        domainFn: (TimeCountModel sales, _) => sales.time,
-        measureFn: (TimeCountModel sales, _) => sales.count,
+        domainFn: (TimeCountModel timeCount, _) => timeCount.time,
+        measureFn: (TimeCountModel timeCount, _) => timeCount.count,
         data: dailyConfirmedCases,
+
       ),
       new charts.Series<TimeCountModel, DateTime>(
         id: 'Daily Deceased',
         displayName: 'Daily Deceased',
         colorFn: (_, __) => charts.MaterialPalette.red.shadeDefault,
-        domainFn: (TimeCountModel sales, _) => sales.time,
-        measureFn: (TimeCountModel sales, _) => sales.count,
+        domainFn: (TimeCountModel timeCount, _) => timeCount.time,
+        measureFn: (TimeCountModel timeCount, _) => timeCount.count,
         data: dailyDeceasedCases,
       ),
       new charts.Series<TimeCountModel, DateTime>(
         id: 'Daily Recovered',
         displayName: 'Daily Recovered',
         colorFn: (_, __) => charts.MaterialPalette.green.shadeDefault,
-        domainFn: (TimeCountModel sales, _) => sales.time,
-        measureFn: (TimeCountModel sales, _) => sales.count,
+        domainFn: (TimeCountModel timeCount, _) => timeCount.time,
+        measureFn: (TimeCountModel timeCount, _) => timeCount.count,
         data: dailyRecovered,
       ),
     ];
@@ -171,16 +172,11 @@ class StateDataBloc extends BaseBloc<BaseEvent> {
     _stateDataRepository
         .fetchDistrictData()
         .listen((Resource<List<DistrictWiseModel>> res) {
-      if (res.data != null) {
-      }
-      print(res);
       _districtWiseBehaviorSubject.add(res);
-
     });
   }
 
   void _getDistrictSeries(GetDistrictSeriesEvent event)async {
-    _simpleChartSeriesBehaviorSubject.add(null);
     final List<DistrictConfirmedModel> data = [];
     event.districtDataList.forEach((element) {
       data.add(DistrictConfirmedModel(element.district,element.confirmed));

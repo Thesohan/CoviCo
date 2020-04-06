@@ -16,19 +16,14 @@ class DateTimeComboLinePointChart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return charts.TimeSeriesChart(
+    return  charts.TimeSeriesChart(
       seriesList,
       animate: animate,
-      // Configure the default renderer as a line renderer. This will be used
-      // for any series that does not define a rendererIdKey.
-      //
-      // This is the default configuration, but is shown here for  illustration.
-      defaultRenderer: charts.LineRendererConfig(),
+      defaultRenderer: new charts.LineRendererConfig(),
       // Custom renderer configuration for the point series.
       customSeriesRenderers: [
-        charts.PointRendererConfig(
-
-            // ID used to link series to this renderer.
+        new charts.PointRendererConfig(
+          // ID used to link series to this renderer.
             customRendererId: 'customPoint')
       ],
       // Optionally pass in a [DateTimeFactory] used by the chart. The factory

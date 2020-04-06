@@ -1,5 +1,3 @@
-import 'package:covico/blocs/state_data_bloc/state_data_bloc.dart';
-import 'package:covico/blocs/state_data_bloc/state_data_event.dart';
 import 'package:covico/constants/spaces.dart';
 import 'package:covico/data/models/district_wise_model.dart';
 import 'package:covico/data/models/time_count_model.dart';
@@ -51,6 +49,12 @@ class BuildDistrictList extends StatelessWidget {
           child: SimpleBarChart(
             series: series,
             animate: false,
+          ),
+        ),
+        Center(
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text('No. Of Confirmed Cases',style: Theme.of(context).textTheme.caption,),
           ),
         ),
         Spaces.h32,

@@ -1,5 +1,7 @@
 import 'package:covico/blocs/state_data_bloc/state_data_bloc.dart';
 import 'package:covico/data/di/injector.dart';
+import 'package:covico/data/models/district_wise_model.dart';
+import 'package:covico/ui/pages/district_wise_page.dart';
 import 'package:covico/ui/pages/my_home_page.dart';
 import 'package:covico/ui/widgets/theme_inherited_widget.dart';
 import 'package:covico/util/themes.dart';
@@ -26,6 +28,17 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      onGenerateRoute: (settings){
+        if(settings.name=='/extract'){
+          final DistrictWiseModel districtWiseModel = settings.arguments;
+          return MaterialPageRoute(
+            builder: (context)=>DistrictWisePage(districtWiseModel:districtWiseModel)
+          );
+        }
+        return MaterialPageRoute(
+          builder: (context)=>MyHomePage(),
+        );
+      },
       theme: ThemeSwitcher.of(context).isDarkModeOn
           ? darkTheme(context)
           : lightTheme(context),

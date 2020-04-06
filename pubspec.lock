@@ -438,6 +438,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.22.6"
+  sailor:
+    dependency: "direct dev"
+    description:
+      name: sailor
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.6.0"
   shelf:
     dependency: transitive
     description:

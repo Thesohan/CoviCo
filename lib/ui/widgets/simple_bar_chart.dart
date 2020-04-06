@@ -16,7 +16,6 @@ class SimpleBarChart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    StateDataBloc stateDataBloc = Provider.of<StateDataBloc>(context);
     return charts.BarChart(
       series,
       animate: animate,

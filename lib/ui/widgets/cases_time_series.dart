@@ -1,5 +1,4 @@
 import 'package:covico/constants/appColors.dart';
-import 'package:covico/constants/spaces.dart';
 import 'package:covico/data/models/state_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -24,8 +23,10 @@ class _CasesTimeSeriesWidgetState extends State<CasesTimeSeriesWidget> {
       children: <Widget>[
         Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Table(children: [
-            TableRow(children: [
+          child: Table(
+              children: [
+            TableRow(
+                children: [
               Text(
                 'Daily Confirmed',
                 style: Theme.of(context).textTheme.caption,
@@ -78,66 +79,36 @@ class _buildCasesTimeSeriesItem extends StatelessWidget {
         super(key: key);
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 2.0,
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Table(
-          children: [
-            TableRow(
-              children: <Widget>[
-                Text('+${casesTimeSeries.dailyconfirmed}'),
-                Text(
-                  '+${casesTimeSeries.dailydeceased}',
-                  style: TextStyle(
-                      color: AppColors.red, fontWeight: FontWeight.bold),
-                ),
-                Text('+${casesTimeSeries.dailyrecovered}',),
-                Text('${casesTimeSeries.totalconfirmed}'),
-                Text(
-                  '${casesTimeSeries.totalrecovered}',
-                  style: TextStyle(
-                    color: Colors.green,
-                  ),
-                ),
-
-                Text(
-                  '${casesTimeSeries.date}',
-                  style: Theme.of(context).textTheme.caption,
-                ),
-              ],
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildCoulmn(
-      BuildContext context, String title, String subtitle, Icon icon) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Card(
-        elevation: 4.0,
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
+      padding: const EdgeInsets.all(16.0),
+      child: Table(
+        children: [
+          TableRow(
             children: <Widget>[
-              icon,
-              Spaces.h8,
+              Text('+${casesTimeSeries.dailyconfirmed}'),
               Text(
-                '$subtitle',
-                style: Theme.of(context).textTheme.headline4,
+                '+${casesTimeSeries.dailydeceased}',
+                style: TextStyle(
+                    color: AppColors.red, fontWeight: FontWeight.bold),
               ),
-              Spaces.h8,
+              Text('+${casesTimeSeries.dailyrecovered}',),
+              Text('${casesTimeSeries.totalconfirmed}'),
               Text(
-                "$title",
-                style: Theme.of(context).textTheme.subtitle1,
+                '${casesTimeSeries.totalrecovered}',
+                style: TextStyle(
+                  color: Colors.green,
+                ),
+              ),
+
+              Text(
+                '${casesTimeSeries.date}',
+                style: Theme.of(context).textTheme.caption,
               ),
             ],
           ),
-        ),
+        ],
       ),
     );
   }
+
 }
