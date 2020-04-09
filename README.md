@@ -11,9 +11,6 @@ Development
 [![Build Status](https://travis-ci.org/akashnimare/foco.svg?branch=master)](https://travis-ci.org/akashnimare/foco)
 [![Windows Build Status](https://ci.appveyor.com/api/projects/status/github/akashnimare/foco?branch=master&svg=true)](https://ci.appveyor.com/project/akashnimare/foco/branch/master)
 
-## Screenshots
-Will be updated soon.
-
 ## Tech/framework used
 1. Dart
 2. Flutter
@@ -41,5 +38,7 @@ https://api.covid19india.org/data.json
 
 Above api is used to get the latest data.
 
+## Download APK
+https://drive.google.com/open?id=1ZucKglItSTucMRC63v4UINHVfw0ynALs
 
 
