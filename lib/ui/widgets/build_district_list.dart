@@ -54,7 +54,10 @@ class BuildDistrictList extends StatelessWidget {
         Center(
           child: Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Text('No. Of Confirmed Cases',style: Theme.of(context).textTheme.caption,),
+            child: Text(
+              'No. Of Confirmed Cases',
+              style: Theme.of(context).textTheme.caption,
+            ),
           ),
         ),
         Spaces.h32,

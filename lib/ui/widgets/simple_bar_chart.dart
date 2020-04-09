@@ -1,16 +1,11 @@
 import 'package:charts_flutter/flutter.dart' as charts;
-import 'package:covico/blocs/state_data_bloc/state_data_bloc.dart';
-import 'package:covico/blocs/state_data_bloc/state_data_event.dart';
-import 'package:covico/data/models/district_wise_model.dart';
 import 'package:covico/data/models/time_count_model.dart';
 import 'package:covico/ui/widgets/theme_inherited_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:provider/provider.dart';
 
 class SimpleBarChart extends StatelessWidget {
   final bool animate;
-  List<charts.Series<DistrictConfirmedModel, String>> series;
+  final List<charts.Series<DistrictConfirmedModel, String>> series;
 
   SimpleBarChart({this.series, this.animate: false});
 

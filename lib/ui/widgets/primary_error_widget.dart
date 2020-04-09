@@ -23,7 +23,7 @@ class PrimaryErrorWidget extends StatelessWidget {
   factory PrimaryErrorWidget.networkErrorOrNot({
     @required BuildContext context,
     @required String message,
-   @required bool isNetworkError,
+    @required bool isNetworkError,
     OnRetry onRetry,
   }) {
     ArgumentError.checkNotNull(context, "context");

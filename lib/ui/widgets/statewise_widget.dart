@@ -114,11 +114,14 @@ class _BuildStatewiseItem extends StatelessWidget {
         super(key: key);
   @override
   Widget build(BuildContext context) {
-    StateDataBloc stateDataBloc = Provider.of<StateDataBloc>(context);
     return InkWell(
       onTap: () {
+        print(districtWise);
         if (districtWise != null) {
-          Navigator.pushNamed(context, '/extract', arguments: districtWise);
+          Navigator.pushNamed(context, '/extract', arguments: {
+            "districtWise": districtWise,
+            "confirmed": statewise.confirmed
+          });
         }
       },
       child: Card(

@@ -275,7 +275,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 Text(
                   'Confirmed',
                   style: Theme.of(context).textTheme.headline6.copyWith(
-                      color: Colors.yellow, fontWeight: FontWeight.bold),
+                      color: Colors.amber, fontWeight: FontWeight.bold),
                 ),
               ],
             ),
@@ -332,9 +332,10 @@ class _MyHomePageState extends State<MyHomePage> {
               Flexible(
                 child: Text(
                   'Cover your nose and mouth with a disposable tissue or flexed elbow when you cough or sneeze Avoid close contact (1 meter or 3 feet) with people who are unwell.',
-                  style: Theme.of(context).textTheme.subtitle1.copyWith(
-                        letterSpacing: 2.0,wordSpacing: 2.0
-                      ),
+                  style: Theme.of(context)
+                      .textTheme
+                      .subtitle1
+                      .copyWith(letterSpacing: 2.0, wordSpacing: 2.0),
                 ),
               ),
             ],

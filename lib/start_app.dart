@@ -28,15 +28,17 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      onGenerateRoute: (settings){
-        if(settings.name=='/extract'){
-          final DistrictWiseModel districtWiseModel = settings.arguments;
+      onGenerateRoute: (settings) {
+        if (settings.name == '/extract') {
+          final Map<String, dynamic> args = settings.arguments;
           return MaterialPageRoute(
-            builder: (context)=>DistrictWisePage(districtWiseModel:districtWiseModel)
-          );
+              builder: (context) => DistrictWisePage(
+                    districtWiseModel: args['districtWise'],
+                    confirmed: args['confirmed'],
+                  ));
         }
         return MaterialPageRoute(
-          builder: (context)=>MyHomePage(),
+          builder: (context) => MyHomePage(),
         );
       },
       theme: ThemeSwitcher.of(context).isDarkModeOn

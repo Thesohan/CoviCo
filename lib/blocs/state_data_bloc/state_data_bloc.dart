@@ -34,12 +34,12 @@ class StateDataBloc extends BaseBloc<BaseEvent> {
   Observable<Resource<List<DistrictWiseModel>>> get districtWiseObservable =>
       _districtWiseBehaviorSubject.stream;
 
-
   BehaviorSubject<List<charts.Series<DistrictConfirmedModel, String>>>
-  _simpleChartSeriesBehaviorSubject =
-  BehaviorSubject<List<charts.Series<DistrictConfirmedModel, String>>>();
-  Observable<List<charts.Series<DistrictConfirmedModel,String>>>
-  get simpleChartSeriesDataObservable => _simpleChartSeriesBehaviorSubject.stream;
+      _simpleChartSeriesBehaviorSubject =
+      BehaviorSubject<List<charts.Series<DistrictConfirmedModel, String>>>();
+  Observable<List<charts.Series<DistrictConfirmedModel, String>>>
+      get simpleChartSeriesDataObservable =>
+          _simpleChartSeriesBehaviorSubject.stream;
 
   @override
   void handleEvent(BaseEvent event) {
@@ -49,8 +49,7 @@ class StateDataBloc extends BaseBloc<BaseEvent> {
       _getChartSeries(event.casesTimeSeries);
     } else if (event is GetDistrictDataEvent) {
       _getDistrictData(event);
-    }
-    else if(event is GetDistrictSeriesEvent){
+    } else if (event is GetDistrictSeriesEvent) {
       _getDistrictSeries(event);
     }
   }
@@ -145,7 +144,6 @@ class StateDataBloc extends BaseBloc<BaseEvent> {
         domainFn: (TimeCountModel timeCount, _) => timeCount.time,
         measureFn: (TimeCountModel timeCount, _) => timeCount.count,
         data: dailyConfirmedCases,
-
       ),
       new charts.Series<TimeCountModel, DateTime>(
         id: 'Daily Deceased',
@@ -176,22 +174,23 @@ class StateDataBloc extends BaseBloc<BaseEvent> {
     });
   }
 
-  void _getDistrictSeries(GetDistrictSeriesEvent event)async {
+  void _getDistrictSeries(GetDistrictSeriesEvent event) async {
     final List<DistrictConfirmedModel> data = [];
     event.districtDataList.forEach((element) {
-      data.add(DistrictConfirmedModel(element.district,element.confirmed));
+      data.add(DistrictConfirmedModel(element.district, element.confirmed));
     });
 
-    List<charts.Series<DistrictConfirmedModel,String>> series= [
+    List<charts.Series<DistrictConfirmedModel, String>> series = [
       charts.Series<DistrictConfirmedModel, String>(
         id: 'District',
         colorFn: (_, __) => charts.MaterialPalette.teal.shadeDefault,
-        domainFn: (DistrictConfirmedModel districtConfirmedModel, _) => districtConfirmedModel.district,
-        measureFn: (DistrictConfirmedModel districtConfirmedModel, _) => districtConfirmedModel.confirmed,
+        domainFn: (DistrictConfirmedModel districtConfirmedModel, _) =>
+            districtConfirmedModel.district,
+        measureFn: (DistrictConfirmedModel districtConfirmedModel, _) =>
+            districtConfirmedModel.confirmed,
         data: data,
       )
     ];
     _simpleChartSeriesBehaviorSubject.add(series);
-
   }
 }

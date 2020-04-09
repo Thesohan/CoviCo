@@ -23,10 +23,8 @@ class _CasesTimeSeriesWidgetState extends State<CasesTimeSeriesWidget> {
       children: <Widget>[
         Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Table(
-              children: [
-            TableRow(
-                children: [
+          child: Table(children: [
+            TableRow(children: [
               Text(
                 'Daily Confirmed',
                 style: Theme.of(context).textTheme.caption,
@@ -58,7 +56,7 @@ class _CasesTimeSeriesWidgetState extends State<CasesTimeSeriesWidget> {
           child: ListView.builder(
             itemCount: widget.casesTimeSeries.length,
             itemBuilder: (context, index) {
-              return _buildCasesTimeSeriesItem(
+              return _BuildCasesTimeSeriesItem(
                 casesTimeSeries: widget.casesTimeSeries[index],
               );
             },
@@ -71,10 +69,10 @@ class _CasesTimeSeriesWidgetState extends State<CasesTimeSeriesWidget> {
   }
 }
 
-class _buildCasesTimeSeriesItem extends StatelessWidget {
+class _BuildCasesTimeSeriesItem extends StatelessWidget {
   final CasesTimeSeries casesTimeSeries;
 
-  const _buildCasesTimeSeriesItem({Key key, this.casesTimeSeries})
+  const _BuildCasesTimeSeriesItem({Key key, this.casesTimeSeries})
       : assert(casesTimeSeries != null),
         super(key: key);
   @override
@@ -91,7 +89,9 @@ class _buildCasesTimeSeriesItem extends StatelessWidget {
                 style: TextStyle(
                     color: AppColors.red, fontWeight: FontWeight.bold),
               ),
-              Text('+${casesTimeSeries.dailyrecovered}',),
+              Text(
+                '+${casesTimeSeries.dailyrecovered}',
+              ),
               Text('${casesTimeSeries.totalconfirmed}'),
               Text(
                 '${casesTimeSeries.totalrecovered}',
@@ -99,7 +99,6 @@ class _buildCasesTimeSeriesItem extends StatelessWidget {
                   color: Colors.green,
                 ),
               ),
-
               Text(
                 '${casesTimeSeries.date}',
                 style: Theme.of(context).textTheme.caption,
@@ -110,5 +109,4 @@ class _buildCasesTimeSeriesItem extends StatelessWidget {
       ),
     );
   }
-
 }

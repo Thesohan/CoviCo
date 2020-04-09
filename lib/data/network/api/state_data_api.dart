@@ -17,7 +17,6 @@ class StateDataApi {
     );
   }
 
-
   Future<Resource<List<DistrictWiseModel>>> fetchDistrictData() async {
     return _requestHandler.sendRequest(
       method: Method.get,

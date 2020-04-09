@@ -10,7 +10,8 @@ class _$Injector extends Injector {
   void common() {
     final Container container = Container();
     container.registerFactory<StateDataRepository, StateDataRepositoryImpl>(
-        (c) => StateDataRepositoryImpl(c<NetworkService>()));
+        (c) => StateDataRepositoryImpl(c<NetworkService>(), c<AppDatabase>()));
+    container.registerSingleton((c) => AppDatabase.init());
   }
 
   void development() {

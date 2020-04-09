@@ -5,17 +5,16 @@ class TimeCountModel {
   TimeCountModel(this.time, this.count);
 }
 
-class DistrictConfirmedModel{
+class DistrictConfirmedModel {
   final String district;
   final int confirmed;
 
   DistrictConfirmedModel(this.district, this.confirmed);
 }
 
-class TotalCountModel{
+class TotalCountModel {
   final String status;
   final int count;
 
   TotalCountModel(this.status, this.count);
-
 }

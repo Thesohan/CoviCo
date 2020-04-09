@@ -61,6 +61,7 @@ class RequestHandler {
     } catch (error, stackTrace) {
       if (error is DioError) {
         _logger.info('error: $error');
+        _logger.info('stackTrace: $stackTrace');
         return handleDioError(error);
       }
       return Resource.failure(message: error.toString());

@@ -12,11 +12,11 @@ class GetSeriesDataEvent extends BaseEvent {
       : assert(casesTimeSeries != null);
 }
 
-class GetDistrictDataEvent extends BaseEvent{
-}
+class GetDistrictDataEvent extends BaseEvent {}
 
-class GetDistrictSeriesEvent extends BaseEvent{
+class GetDistrictSeriesEvent extends BaseEvent {
   final List<DistrictData> districtDataList;
 
-  GetDistrictSeriesEvent({@required this.districtDataList}):assert(districtDataList!=null);
+  GetDistrictSeriesEvent({@required this.districtDataList})
+      : assert(districtDataList != null);
 }
