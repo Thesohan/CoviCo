@@ -15,7 +15,6 @@ class AppDatabase {
   static Database _db;
   StatewiseDao _statewiseDao;
 
-  /// Initialize db
 
   Future<StatewiseDao> get statewiseDao async {
     if (_db == null) {
@@ -24,6 +23,8 @@ class AppDatabase {
     return _statewiseDao;
   }
 
+
+  /// Initialize db
   AppDatabase._() {
     if (_db == null) {
       _openDatabase();
@@ -34,7 +35,7 @@ class AppDatabase {
     // Get a platform-specific directory where persistent app data can be stored
     final appDocumentDir = await getApplicationDocumentsDirectory();
     // Path with the form: /platform-specific-directory/demo.db
-    final dbPath = join(appDocumentDir.path, 'StudentsDB.db');
+    final dbPath = join(appDocumentDir.path, 'CoviCo.db');
 
     _db = await databaseFactoryIo.openDatabase(dbPath);
     _statewiseDao = StatewiseDaoImpl(_db);

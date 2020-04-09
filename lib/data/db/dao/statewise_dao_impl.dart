@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:covico/data/db/dao/statewise_dao.dart';
 import 'package:covico/data/models/district_wise_model.dart';
 import 'package:covico/data/models/state_model.dart';

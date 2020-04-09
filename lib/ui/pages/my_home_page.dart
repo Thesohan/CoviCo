@@ -1,12 +1,14 @@
 import 'package:covico/blocs/state_data_bloc/state_data_bloc.dart';
 import 'package:covico/blocs/state_data_bloc/state_data_event.dart';
 import 'package:covico/constants/spaces.dart';
+import 'package:covico/data/models/district_wise_model.dart';
 import 'package:covico/data/models/state_model.dart';
 import 'package:covico/data/models/time_count_model.dart';
 import 'package:covico/data/resource.dart';
 import 'package:covico/ui/widgets/cases_time_series.dart';
 import 'package:covico/ui/widgets/chart_widget.dart';
 import 'package:covico/ui/widgets/primary_error_widget.dart';
+import 'package:covico/ui/widgets/search_widget.dart';
 import 'package:covico/ui/widgets/statewise_widget.dart';
 import 'package:covico/ui/widgets/stream_task_builder.dart';
 import 'package:covico/ui/widgets/theme_inherited_widget.dart';
@@ -45,12 +47,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Row(
-          children: <Widget>[
-            Expanded(child: Text("CoviCo")),
-            Text("covid19india.org"),
-          ],
-        ),
+        title: Text("CoviCo"),
         actions: <Widget>[
           IconButton(
               icon: ThemeSwitcher.of(context).isDarkModeOn
@@ -191,6 +188,7 @@ class _MyHomePageState extends State<MyHomePage> {
       shrinkWrap: true,
       padding: EdgeInsets.all(8.0),
       children: <Widget>[
+        _buildSearchWidget(),
         _buildLastUpdateTime(statewise),
         _buildActiveStatus(statewise),
         _buildAllStatus(statewise),
@@ -234,22 +232,21 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget _buildLastUpdateTime(Statewise statewise) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
-      child: Row(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
-          Expanded(
-            child: Text(
-              'India',
-              style: Theme.of(context).textTheme.headline5,
-            ),
-          ),
           Text(
-            '${statewise.lastupdatedtime}',
-            style: Theme.of(context).textTheme.caption.copyWith(fontSize: 16.0),
+            'India',
+            style: Theme.of(context).textTheme.headline5,
           ),
-          Spaces.w8,
-          Icon(
-            Icons.watch_later,
-            color: Colors.grey,
+          Center(child: Text('Updated On')),
+          Center(
+            child: Text(
+              '${statewise.lastupdatedtime}',
+              style:
+                  Theme.of(context).textTheme.caption.copyWith(fontSize: 16.0),
+            ),
           ),
         ],
       ),
@@ -376,8 +373,70 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ],
           ),
+          Spaces.h32,
+          Align(
+              alignment: Alignment.bottomRight,
+              child: Text("Source: covid19india.org")),
         ],
       ),
+    );
+  }
+
+  Widget _buildSearchWidget() {
+    return StreamTaskBuilder<List<DistrictWiseModel>>(
+      stream: stateDataBloc.districtWiseObservable,
+      successBuilder: (
+        context,
+        List<DistrictWiseModel> data,
+        Resource<List<DistrictWiseModel>> res,
+      ) {
+        return SearchWidget<DistrictWiseModel>(
+          dataList: res.data,
+          hideSearchBoxWhenItemSelected: false,
+          listContainerHeight: MediaQuery.of(context).size.height / 2,
+          queryBuilder: (query, list) {
+            return list.where((item) {
+              print(item.state);
+              print(item.state.toLowerCase().contains(query.toLowerCase()));
+              return item.state.toLowerCase().contains(query.toLowerCase());
+            }).toList();
+          },
+          popupListItemBuilder: (item) {
+            return Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Text(item.state),
+            );
+          },
+          selectedItemBuilder: (selectedItem, deleteSelectedItem) {
+            return Container();
+          },
+          onItemSelected: (districtWiseModel) {
+            if (districtWiseModel != null) {
+              Navigator.pushNamed(context, '/extract', arguments: {
+                "districtWise": districtWiseModel,
+              });
+            }
+          },
+        );
+      },
+      failureBuilder: (
+        context,
+        List<DistrictWiseModel> data,
+        Resource<List<DistrictWiseModel>> res,
+      ) =>
+          PrimaryErrorWidget.networkErrorOrNot(
+        context: context,
+        isNetworkError: res.isNetworkError,
+        message: 'Something went wrong.',
+        onRetry: () {
+          stateDataBloc.dispatch(GetDistrictDataEvent());
+        },
+      ),
+      loadingBuilder: (
+        context,
+        List<DistrictWiseModel> data,
+        Resource<List<DistrictWiseModel>> res,
+      ) =>Container(),
     );
   }
 }

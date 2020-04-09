@@ -47,7 +47,7 @@ class ChartWidget extends StatelessWidget {
         ),
         Container(
           width: MediaQuery.of(context).size.width,
-          height: 400.0,
+          height:480,
           child: DateTimeComboLinePointChart(
             series,
             animate: false,

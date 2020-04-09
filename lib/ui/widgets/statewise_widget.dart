@@ -115,6 +115,7 @@ class _BuildStatewiseItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
+
       onTap: () {
         print(districtWise);
         if (districtWise != null) {

@@ -32,10 +32,10 @@ class MyApp extends StatelessWidget {
         if (settings.name == '/extract') {
           final Map<String, dynamic> args = settings.arguments;
           return MaterialPageRoute(
-              builder: (context) => DistrictWisePage(
-                    districtWiseModel: args['districtWise'],
-                    confirmed: args['confirmed'],
-                  ));
+            builder: (context) => DistrictWisePage(
+              districtWiseModel: args['districtWise'],
+            ),
+          );
         }
         return MaterialPageRoute(
           builder: (context) => MyHomePage(),

@@ -61,9 +61,13 @@ class StateDataBloc extends BaseBloc<BaseEvent> {
         List<CasesTimeSeries> cases =
             res?.data?.casesTimeSeries?.reversed?.toList();
         List<Statewise> states = res.data.statewise;
-        Statewise temp = states[0];
-        states.removeAt(0);
-        states.add(temp);
+        states.sort((a,b)=>a.state.compareTo(b.state));
+        int index = states.indexWhere((element) => element.state=='Total');
+        if(index>=0){
+          Statewise temp = states[index];
+          states.removeAt(index);
+          states.add(temp);
+        }
         res = res.copyWithNewData(
             data: StateModel(
                 casesTimeSeries: cases,
