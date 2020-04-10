@@ -152,7 +152,7 @@ class MySingleChoiceSearchState<T> extends State<SearchWidget<T>> {
               decoration: InputDecoration(
                 enabledBorder: const OutlineInputBorder(
                   borderSide: BorderSide(
-                    color: Color(0x44374FFF),
+                    color: Colors.blueGrey,
                   ),
                 ),
                 focusedBorder: OutlineInputBorder(

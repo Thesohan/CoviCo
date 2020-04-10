@@ -5,8 +5,8 @@ abstract class StatewiseDao {
   /// Get statewise data;
   ///
   Future<StateModel> getStateModel();
-  void setStateModel(StateModel stateModel);
+  Future setStateModel(StateModel stateModel);
 
   Future<List<DistrictWiseModel>> getDistrictWiseModel();
-  void setDistrictWiseModel(List<DistrictWiseModel> districtWiseModelList);
+  Future setDistrictWiseModel(List<DistrictWiseModel> districtWiseModelList);
 }

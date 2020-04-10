@@ -23,11 +23,9 @@ class StateDataRepositoryImpl extends StateDataRepository {
     }
     Resource<StateModel> res =
         await networkService.stateDataApi.fetchStateData();
-    if (stateModel == null) {
-      yield res;
-    }
     if (res.data != null) {
-      statewiseDao.setStateModel(res.data);
+    await  statewiseDao.setStateModel(res.data);
+    yield res;
     }
   }
 
@@ -46,7 +44,8 @@ class StateDataRepositoryImpl extends StateDataRepository {
       yield res;
     }
     if (res.data != null) {
-      statewiseDao.setDistrictWiseModel(res.data);
+    await  statewiseDao.setDistrictWiseModel(res.data);
+    yield res;
     }
   }
 }

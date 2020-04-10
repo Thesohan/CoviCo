@@ -27,8 +27,8 @@ class StatewiseDaoImpl implements StatewiseDao {
   }
 
   @override
-  void setStateModel(StateModel stateModel) async {
-    await _statewiseFolder.add(_db, stateModel.toJson());
+  Future setStateModel(StateModel stateModel) async {
+    int ans =  await _statewiseFolder.update(_db, stateModel.toJson());
   }
 
   @override
@@ -49,12 +49,12 @@ class StatewiseDaoImpl implements StatewiseDao {
   }
 
   @override
-  void setDistrictWiseModel(List<DistrictWiseModel> districtWiseModelList) {
+  Future setDistrictWiseModel(List<DistrictWiseModel> districtWiseModelList) async{
     final Map<String, dynamic> data = new Map<String, dynamic>();
     if (districtWiseModelList != null) {
       data['districtWiseModel'] =
           districtWiseModelList.map((v) => v.toJson()).toList();
     }
-    _districtwiseFolder.add(_db, data);
+   await _districtwiseFolder.update(_db, data);
   }
 }
