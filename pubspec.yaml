@@ -28,6 +28,9 @@ dependencies:
   rxdart: ^0.22.2
   flutter_spinkit: ^3.1.0
   kiwi: ^0.2.0
+  keyboard_visibility: ^0.5.6
+  sembast: ^2.4.7+7
+  path_provider: ^1.6.18
 
 
 dev_dependencies:

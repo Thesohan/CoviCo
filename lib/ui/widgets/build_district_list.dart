@@ -43,8 +43,8 @@ class BuildDistrictList extends StatelessWidget {
       padding: EdgeInsets.all(4.0),
       children: <Widget>[
         Container(
-          height: districtDataList.length > 3
-              ? MediaQuery.of(context).size.height * .6
+          height: districtDataList.length > 5
+              ? MediaQuery.of(context).size.height
               : MediaQuery.of(context).size.height * .2,
           child: SimpleBarChart(
             series: series,
