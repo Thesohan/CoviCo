@@ -266,7 +266,7 @@ class _MyHomePageState extends State<MyHomePage> {
               children: <Widget>[
                 Text(
                   '${statewise.confirmed}',
-                  style: Theme.of(context).textTheme.headline5,
+                  style: Theme.of(context).textTheme.caption,
                 ),
                 Spaces.h8,
                 Text(
@@ -280,7 +280,7 @@ class _MyHomePageState extends State<MyHomePage> {
               children: <Widget>[
                 Text(
                   '${statewise.recovered}',
-                  style: Theme.of(context).textTheme.headline5,
+                  style: Theme.of(context).textTheme.caption,
                 ),
                 Spaces.h8,
                 Text(
@@ -294,7 +294,7 @@ class _MyHomePageState extends State<MyHomePage> {
               children: <Widget>[
                 Text(
                   '${statewise.deaths}',
-                  style: Theme.of(context).textTheme.headline5,
+                  style: Theme.of(context).textTheme.caption,
                 ),
                 Spaces.h8,
                 Text(

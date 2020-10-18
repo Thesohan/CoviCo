@@ -38,7 +38,18 @@ https://api.covid19india.org/data.json
 
 Above api is used to get the latest data.
 
-## Download APK
-https://drive.google.com/open?id=1ZucKglItSTucMRC63v4UINHVfw0ynALs
+## Results
+
+<p align="center">
+<img src="./screnshots/homepage_1.png" height="560" hspace="30">
+<img src="./screnshots/homepage_2.png" height="560" hspace="30">
+<br><br><br>
+<img src="./screnshots/chart.png" height="560" hspace="30">
+<img src="./screnshots/case_time_series.png" height="560" hspace="30">
+<br><br><br>
+<img src="./screnshots/statewise.png" height="560" hspace="30">
+<img src="./screnshots/state_data.png" height="560" hspace="30">
+</p>
+
 
 
